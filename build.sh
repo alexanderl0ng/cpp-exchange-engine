@@ -17,11 +17,12 @@ auto_compile_flags=''
 # --- Compile/Link Line Definitions -------------------------------------------
 clang_common="-I../src/ -g"
 clang_common="$clang_common -Wno-unknown-warning-option -fdiagnostics-absolute-paths -Wall -Wno-missing-braces -Wno-unused-function -Wno-writable-strings -Wno-unused-value -Wno-unused-variable -Wno-unused-local-typedef -Wno-deprecated-register -Wno-deprecated-declarations -Wno-unused-but-set-variable -Wno-single-bit-bitfield-constant-conversion -Wno-compare-distinct-pointer-types -Wno-initializer-overrides -Wno-incompatible-pointer-types-discards-qualifiers -Wno-for-loop-analysis -Xclang -flto-visibility-public-std -D_USE_MATH_DEFINES -Dstrdup=_strdup -Dgnu_printf=printf"
-clang_common="$clang_common -std=c++17" # -I/opt/homebrew/include/"
-clang_common="$clang_common -framework OpenGL $(pkg-config --libs --cflags raylib) -I$(realpath third_party/raygui/src/)"
+clang_common="$clang_common -std=c++17"
+clang_common="$clang_common -framework OpenGL -I$(realpath third_party/raylib-master/src/) -L$(realpath third_party/raylib-master/src/) -lraylib"
+clang_common="$clang_common -framework Cocoa -framework IOKit -framework CoreVideo"
+clang_common="$clang_common -I$(realpath third_party/raygui/src/)"
 clang_debug="$compiler -g -O0 -DBUILD_DEBUG=1 ${clang_common} ${auto_compile_flags}"
 clang_release="$compiler -g -O2 -DBUILD_DEBUG=0 ${clang_common} ${auto_compile_flags}"
-# clang_link="-L/opt/homebrew/lib/ -lraylib" # -lpthread -lm -lrt -ldl"
 clang_link=""
 clang_out="-o"
 gcc_common='-I../src/ -g -Wno-unknown-warning-option -Wall -Wno-missing-braces -Wno-unused-function -Wno-attributes -Wno-unused-value -Wno-unused-variable -Wno-unused-local-typedef -Wno-deprecated-declarations -Wno-unused-but-set-variable -Wno-compare-distinct-pointer-types -D_USE_MATH_DEFINES -Dstrdup=_strdup -Dgnu_printf=printf'
